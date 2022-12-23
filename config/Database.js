@@ -1,9 +1,18 @@
-import { Sequelize } from "sequelize";
+let mysql = require("mysql2");
 
-const db = new Sequelize("j2fexpress_db", "j2fexpress", "An0thrS3crt", {
+let connection = mysql.createConnection({
   host: "localhost",
-  dialect: "mysql",
-  port: "3306",
+  user: "j2fexpress",
+  password: "An0thrS3crt",
+  database: "j2fexpress_db",
 });
 
-export default db;
+connection.connect(function (error) {
+  if (!!error) {
+    console.log(error);
+  } else {
+    console.log("Koneksi Berhasil!");
+  }
+});
+
+module.exports = connection;
