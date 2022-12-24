@@ -46,12 +46,15 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/users", (req, res) => {
-  connection.query("SELECT * FROM users", (err, result) => {
-    if (err) {
-      return res.status(500).json(err);
+  connection.query(
+    "SELECT id,nama,email,roleUser,createdAt FROM users",
+    (err, result) => {
+      if (err) {
+        return res.status(500).json(err);
+      }
+      return res.status(200).json(result);
     }
-    return res.status(200).json(result);
-  });
+  );
 });
 
 app.post("/api/register", async (req, res) => {
